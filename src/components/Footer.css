@@ -1,0 +1,219 @@
+/*
+  File: Footer.css
+  Description: Highly Animated Futuristic Footer Styles
+*/
+
+/* --- Global Styles & Variables (Ensure these match your existing theme) --- */
+:root {
+  --background-deep-dark: #050508;
+  --text-primary: #f0f0f0;
+  --neon-cyan: #00e5ff;
+  --neon-magenta: #cc00ff;
+  --font-heading: 'Aldrich', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+/* --- Footer Container --- */
+.futuristic-footer {
+  position: relative;
+  width: 100%;
+  padding: 40px 20px; /* Ample padding to give space for animations */
+  background: var(--background-deep-dark);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  text-align: center;
+  overflow: hidden; /* Crucial for containing background animations */
+  box-sizing: border-box;
+  margin-top: auto; /* Pushes footer to the bottom in a flex container */
+  z-index: 10; /* Ensures it's above other page content */
+  border-top: 1px solid rgba(0, 229, 255, 0.1); /* Subtle top border for definition */
+}
+
+/* --- Background Animation Layers for Footer --- */
+.footer-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows clicks to pass through */
+  z-index: 0; /* Keep behind content */
+}
+
+/* Layer A: Subtle pulsating glow */
+.footer-bg-layer.layer-a {
+  background: radial-gradient(circle at 50% 120%, rgba(0, 229, 255, 0.03) 0%, transparent 60%);
+  animation: footer-glow-pulse 15s infinite ease-in-out alternate;
+  filter: blur(10px);
+}
+
+/* Layer B: Moving scanlines/grid */
+.footer-bg-layer.layer-b {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(204, 0, 255, 0.02), /* Magenta subtle lines */
+    rgba(204, 0, 255, 0.02) 2px,
+    transparent 2px,
+    transparent 25px
+  );
+  background-size: 200% 200%; /* Larger than viewport for movement */
+  animation: footer-scanline-move 25s infinite linear;
+  opacity: 0.1;
+}
+
+/* Layer C: Gentle shifting color wave */
+.footer-bg-layer.layer-c {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 229, 255, 0.05) 10%, /* Cyan */
+    transparent 20%,
+    rgba(204, 0, 255, 0.05) 30%, /* Magenta */
+    transparent 40%,
+    rgba(0, 229, 255, 0.05) 50%,
+    transparent 60%,
+    rgba(204, 0, 255, 0.05) 70%,
+    transparent 80%
+  );
+  animation: footer-color-wave 30s infinite linear;
+  filter: blur(5px);
+  opacity: 0.15;
+}
+
+/* --- Keyframe Animations for Footer Background --- */
+@keyframes footer-glow-pulse {
+  0% { transform: scale(1); opacity: 0.03; }
+  50% { transform: scale(1.1); opacity: 0.05; } /* Subtle pulse */
+  100% { transform: scale(1); opacity: 0.03; }
+}
+
+@keyframes footer-scanline-move {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; } /* Moves the repeating lines */
+}
+
+@keyframes footer-color-wave {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; } /* Shifts the gradient horizontally */
+}
+
+/* --- Content Wrapper (Sits above background layers) --- */
+.footer-content-wrapper {
+  position: relative;
+  z-index: 1; /* Ensures content is visible over background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Space between text and line/smile */
+}
+
+/* --- Footer Text --- */
+.footer-text {
+  font-family: var(--font-mono); /* Techy, code-like font */
+  font-size: 1.1em;
+  color: var(--text-primary);
+  margin: 0;
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
+}
+
+/* Glitch Effect for "DATA SECURE." text */
+.footer-text .text-glitch {
+  display: inline-block; /* Essential for transform animations */
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan);
+  animation: glitch-text 4s infinite linear alternate; /* Continuous, subtle glitch */
+  margin-left: 5px;
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0); text-shadow: 0 0 8px var(--neon-cyan); }
+  20% { transform: translate(-1px, 1px); text-shadow: 0 0 10px var(--neon-magenta); }
+  40% { transform: translate(1px, -1px); text-shadow: 0 0 8px var(--neon-cyan); }
+  60% { transform: translate(-1px, 0); text-shadow: 0 0 10px var(--neon-magenta); }
+  80% { transform: translate(1px, 1px); text-shadow: 0 0 8px var(--neon-cyan); }
+  100% { transform: translate(0); text-shadow: 0 0 10px var(--neon-magenta); }
+}
+
+/* --- Small Line and Smile Face Container --- */
+.footer-line-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between line and smile */
+  height: 20px; /* Ensures consistent vertical alignment */
+}
+
+/* The beautiful small animated line */
+.footer-animated-line {
+  height: 3px;
+  width: 100px; /* Controlled by Framer Motion in JS, but a fallback width */
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), transparent);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden; /* Important for the flow effect */
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.5), 0 0 15px rgba(204, 0, 255, 0.3);
+}
+
+/* The flowing "energy" inside the line */
+.footer-animated-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Starts off-screen to the left */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+  animation: line-flow 2s infinite linear; /* Continuous flow animation */
+}
+
+@keyframes line-flow {
+  0% { left: -100%; }
+  100% { left: 100%; } /* Moves across the line */
+}
+
+/* The beautiful smile face */
+.footer-smile {
+  font-family: var(--font-heading); /* Futuristic font for the smile */
+  font-size: 1.8em; /* Prominent smile size */
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease; /* For smooth non-Framer Motion transitions */
+}
+
+.footer-smile:hover {
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.9), 0 0 25px rgba(204, 0, 255, 0.8); /* Enhanced glow on hover */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .futuristic-footer {
+    padding: 30px 15px;
+  }
+  .footer-text {
+    font-size: 1em;
+  }
+  .footer-smile {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 480px) {
+  .futuristic-footer {
+    padding: 20px 10px;
+  }
+  .footer-text {
+    font-size: 0.9em;
+  }
+  .footer-line-container {
+    flex-direction: column; /* Stack line and smile on very small screens */
+    gap: 5px;
+  }
+  .footer-animated-line {
+    width: 80px; /* Slightly shorter line */
+  }
+  .footer-smile {
+    font-size: 1.4em;
+  }
+}

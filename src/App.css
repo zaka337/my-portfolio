@@ -1,0 +1,30 @@
+/* Add any global styles here if needed, for instance, a custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1a1a1e; /* Darker background for track */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00FFFF, #8A2BE2); /* Cyan to Purple gradient */
+  border-radius: 10px;
+  border: 2px solid #1a1a1e; /* Border to make it look thinner */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #33FFFF, #9A4BEF); /* Lighter gradient on hover */
+}
+html {
+  scroll-behavior: smooth;
+}
+/* In your src/index.css or App.css */
+body, html {
+  overflow: hidden; /* Hides both horizontal and vertical scrollbars and prevents scrolling */
+}
+/* In your src/index.css or App.css */
+body, html {
+  overflow-x: hidden; /* Hides only the horizontal scrollbar */
+}
