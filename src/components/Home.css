@@ -1,265 +1,479 @@
-/* src/components/Home.css */
+/* Font Imports */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
 
-/* Font Imports (Consistent across your app) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
-
-/* GLOBAL CSS VARIABLES (Adjusted to strongly match your reference image's color scheme) */
-/* IMPORTANT: Ensure these exact variables are present and consistent in your
-   index.css (or App.css), About.css, Contact.css, and Footer.css for a unified theme. */
+/* CSS Variables */
 :root {
-    /* Backgrounds & Base Colors from Reference Image */
-    --main-background-start: #0B071A; /* Very dark deep purple/blue */
-    --main-background-end: #1A0A33;   /* Slightly lighter indigo/purple */
-    --darker-charcoal: #0D0D0D;        /* For modal background etc., almost black */
-    --text-light: #E0E0E0;             /* General light text */
-    --text-dim: #A0A0A0;               /* Dimmer secondary text */
-
-    /* Primary Neon Hues (from Reference Image) */
-    --neon-purple-dark: #6C3DFF;     /* Darker purple for gradients/shadows */
-    --neon-purple-light: #A881FF;    /* Lighter purple for gradients/highlights */
-    --neon-blue-light: #4DFFFF;      /* Bright cyan/light blue */
-    --neon-blue-vibrant: #00BFFF;    /* Electric blue (used sparingly for contrast) */
-    --neon-green-accent: #39FF14;    /* Vibrant neon green (used sparingly for contrast) */
-
-
-    /* Derived Gradients & Shadows */
-    --headline-gradient: linear-gradient(90deg, var(--neon-purple-light), var(--neon-blue-light)); /* Purple to Cyan */
-    --button-gradient-primary: linear-gradient(90deg, var(--neon-purple-dark), var(--neon-blue-vibrant)); /* Purple to Blue */
-    --button-gradient-secondary: linear-gradient(90deg, var(--neon-blue-vibrant), var(--neon-green-accent)); /* Blue to Green */
-
-    --main-glow: 0 0 20px rgba(77, 255, 255, 0.4), 0 0 40px rgba(170, 129, 255, 0.3); /* Cyan/Purple Glow */
-    --text-node-glow-hover: 0 0 10px var(--neon-blue-light), 0 0 20px rgba(108, 61, 255, 0.2); /* Specific glow for hover text nodes */
+  --main-background-start: #0b071a;
+  --main-background-end: #1a0a33;
+  --darker-charcoal: #0d0d0d;
+  --text-light: #e0e0e0;
+  --text-dim: #a0a0a0;
+  --neon-purple-dark: #6c3dff;
+  --neon-purple-light: #a881ff;
+  --neon-blue-light: #4dffff;
+  --neon-blue-vibrant: #00bfff;
+  --neon-green-accent: #39ff14;
+  --headline-gradient: linear-gradient(90deg, var(--neon-purple-light), var(--neon-blue-light));
+  --button-gradient-primary: linear-gradient(90deg, var(--neon-purple-dark), var(--neon-blue-vibrant));
+  --button-gradient-secondary: linear-gradient(90deg, var(--neon-blue-vibrant), var(--neon-green-accent));
+  --main-glow: 0 0 20px rgba(77, 255, 255, 0.4), 0 0 40px rgba(170, 129, 255, 0.3);
+  --text-node-glow-hover: 0 0 10px var(--neon-blue-light), 0 0 20px rgba(108, 61, 255, 0.2);
 }
 
-
-/* --- Home Section Base --- */
+/* Base Styles */
 .home-hero-section {
-    position: relative;
-    width: 100vw;
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end; /* Align content to the bottom */
-    overflow: hidden; /* Hide anything outside */
-    color: var(--text-light);
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--main-background-start); /* Fallback background color */
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px; /* Ensure minimum height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  color: var(--text-light);
+  font-family: "Poppins", sans-serif;
+  background-color: var(--main-background-start);
 }
 
-/* --- 1. Full-screen Futuristic Video Background --- */
+/* Video Background */
 .background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures video covers the entire container */
-    z-index: 1; /* Below overlay and content */
-    filter: brightness(0.7) contrast(1.2); /* Adjust brightness/contrast to make it more futuristic and less distracting */
-    opacity: 0.8; /* Slightly transparent */
-    will-change: transform, opacity; /* Hint to browser for smoother animation */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  filter: brightness(0.7) contrast(1.2);
+  opacity: 0.8;
+  will-change: transform, opacity;
 }
 
 .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(11, 7, 26, 0.7) 0%, rgba(26, 10, 51, 0.7) 100%); /* Semi-transparent overlay with background gradient colors */
-    z-index: 2; /* Between video and content */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(11, 7, 26, 0.7) 0%, rgba(26, 10, 51, 0.7) 100%);
+  z-index: 2;
 }
 
-/* --- Main Content Container --- */
+/* Main Content Container */
 .home-content-container {
-    position: relative; /* For positioning child elements like text nodes */
-    z-index: 3; /* Above video and overlay */
-    width: 100%;
-    max-width: 1200px; /* Max width for central content */
-    height: 100%; /* Allows text nodes to distribute vertically */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Push tagline to bottom */
-    align-items: center;
-    padding: 0 40px 80px 40px; /* Padding for bottom tagline */
-    box-sizing: border-box;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 40px 80px 40px;
+  box-sizing: border-box;
 }
 
-/* --- 2. Large Font at Bottom --- */
+/* Desktop and Mobile Node Containers */
+.desktop-nodes {
+  display: block;
+}
+
+.mobile-nodes {
+  display: none;
+}
+
+.mobile-nodes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Main Tagline */
 .bottom-tagline {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4.5em; /* Large size */
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: center;
-    margin-bottom: 0; /* No bottom margin, pushed by justify-content: flex-end */
-    color: var(--text-light);
-    text-shadow: var(--main-glow); /* Apply main glow */
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem); /* Responsive font size */
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 0;
+  color: var(--text-light);
+  text-shadow: var(--main-glow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 .bottom-tagline .gradient-text {
-    background: var(--headline-gradient); /* Purple to Cyan gradient */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* Essential for text gradients with line breaks */
+  background: var(--headline-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
-/* --- 4. Small Text Nodes on Different Places --- */
+.desktop-break {
+  display: block;
+}
+
+.mobile-break {
+  display: none;
+}
+
+/* Text Nodes */
 .info-node {
-    position: absolute; /* Allows precise placement */
-    background: rgba(10, 10, 10, 0.5); /* Semi-transparent background */
-    backdrop-filter: blur(5px); /* Subtle blur for frosted glass effect */
-    border: 1px solid rgba(77, 255, 255, 0.1); /* Thin cyan border */
-    border-radius: 8px;
-    padding: 15px 20px;
-    text-align: left;
-    color: var(--text-light);
-    opacity: 0.3; /* Start subtle */
-    cursor: default; /* No pointer on hover unless we want it clickable */
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgba(77, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(77, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: left;
+  color: var(--text-light);
+  opacity: 0.3;
+  cursor: pointer; /* Make it clear they're interactive */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  user-select: none; /* Prevent text selection on tap */
 }
 
 .info-node:hover {
-    opacity: 1; /* More visible on hover */
-    box-shadow: var(--text-node-glow-hover); /* Apply glow on hover */
-    transform: translateY(-5px); /* Slight lift */
+  opacity: 1;
+  box-shadow: var(--text-node-glow-hover);
+  transform: translateY(-5px);
+  border-color: rgba(77, 255, 255, 0.4);
+}
+
+.info-node:active {
+  opacity: 1;
+  box-shadow: 0 0 20px var(--neon-blue-light), 0 0 40px rgba(108, 61, 255, 0.4), 0 0 60px rgba(77, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--neon-blue-light);
 }
 
 .node-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9em;
-    font-weight: 600;
-    color: var(--neon-blue-light); /* Cyan color for label */
-    margin-bottom: 5px;
-    letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--neon-blue-light);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 .node-detail {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.8em;
-    color: var(--text-dim);
-    line-height: 1.4;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8em;
+  color: var(--text-dim);
+  line-height: 1.4;
+  margin: 0;
 }
 
-/* Specific positioning for each text node (adjust as desired) */
+/* Desktop Node Positioning */
+.desktop-nodes .info-node {
+  position: absolute;
+}
+
 .node-top-left {
-    top: 15%;
-    left: 10%;
+  top: 15%;
+  left: 10%;
 }
-
 .node-top-right {
-    top: 10%;
-    right: 10%;
+  top: 10%;
+  right: 10%;
 }
-
 .node-middle-left {
-    top: 40%;
-    left: 5%;
+  top: 40%;
+  left: 5%;
 }
-
 .node-middle-right {
-    top: 45%;
-    right: 5%;
+  top: 45%;
+  right: 5%;
 }
-
 .node-bottom-right {
-    bottom: 25%; /* Relative to the home-content-container's bottom */
-    right: 15%;
+  bottom: 25%;
+  right: 15%;
 }
 
-/* --- Responsive Adjustments --- */
+/* Mobile Node Styles */
+.mobile-node {
+  position: static !important;
+  opacity: 0.8 !important;
+  transform: none !important;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  cursor: pointer;
+  touch-action: manipulation; /* Optimize for touch */
+}
+
+.mobile-node:hover {
+  opacity: 1 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--text-node-glow-hover);
+}
+
+.mobile-node:active {
+  opacity: 1 !important;
+  transform: translateY(-1px) scale(1.02) !important;
+  box-shadow: 0 0 15px var(--neon-blue-light), 0 0 30px rgba(108, 61, 255, 0.3);
+}
+
+/* Responsive Breakpoints */
+
+/* Large Desktop */
 @media (max-width: 1200px) {
-    .bottom-tagline {
-        font-size: 4em;
-    }
-    .node-top-left { top: 12%; left: 8%; }
-    .node-top-right { top: 8%; right: 8%; }
-    .node-middle-left { top: 38%; left: 3%; }
-    .node-middle-right { top: 43%; right: 3%; }
-    .node-bottom-right { bottom: 20%; right: 12%; }
+  .node-top-left {
+    top: 12%;
+    left: 8%;
+  }
+  .node-top-right {
+    top: 8%;
+    right: 8%;
+  }
+  .node-middle-left {
+    top: 38%;
+    left: 3%;
+  }
+  .node-middle-right {
+    top: 43%;
+    right: 3%;
+  }
+  .node-bottom-right {
+    bottom: 20%;
+    right: 12%;
+  }
 }
 
+/* Tablet */
 @media (max-width: 992px) {
-    .bottom-tagline {
-        font-size: 3.5em;
-        padding-bottom: 60px;
-    }
-    .info-node {
-        padding: 12px 15px;
-        border-radius: 6px;
-    }
-    .node-label { font-size: 0.8em; }
-    .node-detail { font-size: 0.75em; }
-    .node-top-left { top: 10%; left: 5%; }
-    .node-top-right { top: 7%; right: 5%; }
-    .node-middle-left { top: 35%; left: 2%; }
-    .node-middle-right { top: 40%; right: 2%; }
-    .node-bottom-right { bottom: 15%; right: 8%; }
+  .home-content-container {
+    padding: 0 30px 60px 30px;
+  }
+
+  .info-node {
+    padding: 14px 18px;
+    border-radius: 10px;
+  }
+
+  .node-label {
+    font-size: 0.85em;
+  }
+  .node-detail {
+    font-size: 0.75em;
+  }
+
+  .node-top-left {
+    top: 10%;
+    left: 5%;
+  }
+  .node-top-right {
+    top: 7%;
+    right: 5%;
+  }
+  .node-middle-left {
+    top: 35%;
+    left: 2%;
+  }
+  .node-middle-right {
+    top: 40%;
+    right: 2%;
+  }
+  .node-bottom-right {
+    bottom: 15%;
+    right: 8%;
+  }
 }
 
+/* Mobile Landscape and Small Tablet */
 @media (max-width: 768px) {
-    .home-hero-section {
-        justify-content: flex-end; /* Still align to bottom */
-        padding-bottom: 40px; /* More space for tagline */
-    }
-    .bottom-tagline {
-        font-size: 2.8em;
-        line-height: 1.3;
-        padding: 0 20px 40px 20px;
-    }
-    .home-content-container {
-        padding: 0 20px 40px 20px;
-    }
-    .info-node {
-        padding: 10px 12px;
-        opacity: 0.8; /* Make them slightly more visible by default on small screens */
-        position: static; /* Stack them in a row for mobile, below tagline */
-        margin: 10px auto; /* Center them when stacked */
-        text-align: center;
-        max-width: 90%;
-        width: fit-content;
-        transform: none !important; /* Override hover transform for static positioning */
-        box-shadow: var(--text-node-glow-hover); /* Keep glow for mobile without hover */
-    }
-    /* Hide some nodes on smaller screens to prevent clutter */
-    .node-middle-left, .node-middle-right, .node-bottom-right {
-        display: none;
-    }
-    .home-content-container {
-        flex-direction: column;
-        justify-content: flex-end; /* Keep tagline at bottom */
-        align-items: center;
-        /* Re-introduce some of the nodes below the main tagline on mobile,
-           or keep them absolute and adjust positions significantly */
-        /* For simplicity, I've opted to stack them below on mobile */
-    }
-    .node-top-left, .node-top-right {
-        position: static;
-        margin: 10px auto;
-        width: fit-content;
-    }
-    .node-top-left { order: 2; } /* Order to control stacking */
-    .node-top-right { order: 3; }
-    .bottom-tagline { order: 1; } /* Tagline first */
+  .home-hero-section {
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  .home-content-container {
+    padding: 20px;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .desktop-nodes {
+    display: none;
+  }
+
+  .mobile-nodes {
+    display: block;
+  }
+
+  .bottom-tagline {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    line-height: 1.3;
+    order: 2;
+  }
+
+  .mobile-nodes {
+    order: 1;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  .mobile-break {
+    display: inline;
+  }
+
+  /* Optimize video for mobile */
+  .background-video {
+    filter: brightness(0.5) contrast(1.1);
+    opacity: 0.6;
+  }
+
+  .video-overlay {
+    background: linear-gradient(135deg, rgba(11, 7, 26, 0.8) 0%, rgba(26, 10, 51, 0.8) 100%);
+  }
+
+  /* Enhanced touch feedback for mobile */
+  .info-node {
+    -webkit-tap-highlight-color: rgba(77, 255, 255, 0.2);
+    tap-highlight-color: rgba(77, 255, 255, 0.2);
+  }
+
+  .info-node:active {
+    background: rgba(10, 10, 10, 0.8);
+    border-color: var(--neon-blue-light);
+  }
 }
 
-
+/* Mobile Portrait */
 @media (max-width: 480px) {
-    .bottom-tagline {
-        font-size: 2.2em;
-    }
-    .info-node {
-        font-size: 0.75em;
-        padding: 8px 10px;
-    }
-    .node-label { font-size: 0.7em; }
-    .node-detail { font-size: 0.65em; }
-    /* You might want to hide all but one or two nodes on very small screens */
-    .info-node:not(.node-top-left):not(.node-top-right) {
-        display: none;
-    }
+  .home-content-container {
+    padding: 15px;
+    gap: 25px;
+  }
+
+  .bottom-tagline {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-nodes-grid {
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .info-node {
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+
+  .node-label {
+    font-size: 0.75em;
+    margin-bottom: 3px;
+  }
+
+  .node-detail {
+    font-size: 0.7em;
+    line-height: 1.3;
+  }
+
+  /* Show only 2 nodes on very small screens */
+  .mobile-node:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/* Very Small Mobile */
+@media (max-width: 360px) {
+  .home-content-container {
+    padding: 10px;
+  }
+
+  .bottom-tagline {
+    font-size: clamp(1.3rem, 8vw, 1.8rem);
+  }
+
+  .info-node {
+    padding: 10px 14px;
+  }
+
+  .node-label {
+    font-size: 0.7em;
+  }
+  .node-detail {
+    font-size: 0.65em;
+  }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  .home-hero-section {
+    min-height: 100vh;
+  }
+
+  .home-content-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .mobile-nodes {
+    order: 1;
+    flex: 0 0 auto;
+  }
+
+  .mobile-nodes-grid {
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+
+  .bottom-tagline {
+    order: 2;
+    flex: 1;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    text-align: right;
+  }
+
+  .mobile-node {
+    min-width: 120px;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .info-node {
+    border-width: 0.5px;
+  }
+
+  .bottom-tagline {
+    text-shadow: var(--main-glow), 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .background-video {
+    animation-play-state: paused;
+  }
+
+  .info-node {
+    transition: opacity 0.2s ease;
+  }
+
+  .info-node:hover {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .video-overlay {
+    background: linear-gradient(135deg, rgba(11, 7, 26, 0.85) 0%, rgba(26, 10, 51, 0.85) 100%);
+  }
 }
